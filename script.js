@@ -59,24 +59,58 @@ function updateCarousel(){
 
 //Contact Form
 
-const contactForm = document.getElementById('contactForm');
-const formMessage = document.getElementById('formMessage');
+document.addEventListener("DOMContentLoaded", function(){
+    const contactForm = document.getElementById('contactForm');
+    const formMessage = document.getElementById('formMessage');
 
-contactForm.addEventListener('submit', (event) => {
-    event.preventDefault();
+    contactForm.addEventListener('submit', (event) => {
+        event.preventDefault();
 
-    //Simple Validation
+        //Simple Validation
 
-    const name = document.getElementById('name').ariaValueMax.trim();
-    const email = document.getElementById('email').ariaValueMax.trim();
-    const message = document.getElementById('message').ariaValueMax.trim();
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const message = document.getElementById('Message').value.trim();
+        
+        //Basic validation
 
-    if(name === '' || email === '' || message === ''){
-        formMessage.textContent = 'All fields are required!';
-        formMessage.style.color = 'red';
-    } else {
-        formMessage.textContent = 'Thank you! Your message has been sent.';
-        formMessage.style.color = 'green';
+        if(name === '' || email === '' || message === ''){
+            formMessage.textContent = 'All fields are required!';
+            formMessage.style.color = 'red';
+        } else {
+            submitFormWithAjax(name, email, message);
+            formMessage.textContent = 'Thank you! Your message has been sent.';
+            formMessage.style.color = 'green';
+        }
+    });
+
+    function submitFormWithAjax(name, email, message){
+        //Create JS object
+
+        const formData = {
+            name: name,
+            email: email,
+            message: message
+        };
+
+        console.log("Form Data: ", formData);
+
+        fetch("https://jsonplaceholder.typicode.com/posts", {
+            method: "POST",
+            headers:{
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Form submitted successfully! ", data);
+            alert("Your message has been sent successfully!");
+        })
+        .catch(error => {
+            console.log("Error:  ", error);
+            alert("There was an error submitting the form.");
+        })
     }
-});
+})
 
