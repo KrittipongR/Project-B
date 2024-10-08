@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function(){
             body: JSON.stringify(formData),
             mode: "no-cors"
         })
-        .then(response => response.json())
+        //.then(response => response.json())
         .then(data => {
             console.log("Form submitted successfully! ", data);
             alert("Your message has been sent successfully!");
