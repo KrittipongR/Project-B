@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
         console.log("Form Data: ", formData);
 
-        fetch("https://script.google.com/macros/s/AKfycbzIORk4NvsZ1EWmxEtbQBPED4GuHhQUrJOtWj152n97V8aQ_R8_GvEKB6dZITuBEOU/exec", {
+        fetch("https://script.google.com/macros/s/AKfycbwTSkIWxmMChFACmLWER-JOUKXWhcp3oAVzqLLs_4AFTJr-KA0F_gfItV0lGPbsaEVZJw/exec", {
             method: "POST",
             headers:{
                 "Content-Type": "application/json"
