@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
         console.log("Form Data: ", formData);
 
-        fetch("https://jsonplaceholder.typicode.com/posts", {
+        fetch("https://script.google.com/macros/s/AKfycbzIORk4NvsZ1EWmxEtbQBPED4GuHhQUrJOtWj152n97V8aQ_R8_GvEKB6dZITuBEOU/exec", {
             method: "POST",
             headers:{
                 "Content-Type": "application/json"
