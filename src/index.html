@@ -59,19 +59,19 @@
         <div class="carousel-container">
             <div class="carousel">
                 <div class="carousel-item">
-                    <img src="Asset\Picture\Decentralized Authentication Presentation.png" alt="">
+                    <img src="../Asset\Picture\Decentralized Authentication Presentation.png" alt="">
                     <h3>Decentralized Authentication As a Service using Smart Contracts</h3>
                     <p>Authentication service based on usage of smart contracts, public ledgers, and IPFS</p>
                     <p>My contribution: Designed all the diagrams and testing the demo</p>
                 </div>
                 <div class="carousel-item">
-                    <img src="Asset\Picture\Pathfinder.png" alt="">
+                    <img src="../Asset\Picture\Pathfinder.png" alt="">
                     <h3>Pathfinder</h3>
                     <p>Job Finding web app for students</p>
                     <p>My contribution: Designed some of the use case descriptions and sequence diagrams, and the Figma prototype.</p>
                 </div>
                 <div class="carousel-item">
-                    <img src="Asset\Picture\SIGN UP.png" alt="">
+                    <img src="../Asset\Picture\SIGN UP.png" alt="">
                     <h3>Library Management App</h3>
                     <p>Basic CRUD Web Application project for book lending and seats reservation</p>
                     <p>My contribution: Designed the interface for all pages and adjusted some frontend codes</p>
@@ -87,7 +87,7 @@
 
      <section id="contact" class="contact-section">
         <h2>Get in Touch</h2>
-        <form id="contactForm" action="#" method="POST">
+        <form id="contactForm">
             <label for="name">Name:</label>
             <input type="text" name="name" id="name" required>
             <label for="email">Email:</label>
@@ -110,5 +110,61 @@
 
      <!--Link to JS file-->
      <script src="script.js"></script>
+     <script type="module">
+        // Import the functions you need from Firebase SDKs
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
+        import { getFirestore, collection, addDoc } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyCV2DPU_Gygqq3ptIzWTo2wVM2ClvM-q8Q",
+          authDomain: "form-submission-project-c6793.firebaseapp.com",
+          projectId: "form-submission-project-c6793",
+          storageBucket: "form-submission-project-c6793.appspot.com",
+          messagingSenderId: "144630533145",
+          appId: "1:144630533145:web:59bdbe5930f89d6fdb2e88",
+          measurementId: "G-KZYQFBX7QW"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+      
+        // Contact form submission
+        document.addEventListener("DOMContentLoaded", function() {
+          const contactForm = document.getElementById('contactForm');
+          const formMessage = document.getElementById('formMessage');
+      
+          contactForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+      
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('Message').value.trim();
+      
+            if (name === '' || email === '' || message === '') {
+                formMessage.textContent = 'All fields are required!';
+                formMessage.style.color = 'red';
+            } else {
+                // Submit form data to Firestore
+                addDoc(collection(db, 'contactSubmissions'), {
+                    name: name,
+                    email: email,
+                    message: message,
+                    timestamp: new Date().toISOString()
+                })
+                .then(() => {
+                    formMessage.textContent = 'Thank you! Your message has been sent.';
+                    formMessage.style.color = 'green';
+                })
+                .catch((error) => {
+                    console.error("Error submitting form: ", error);
+                    formMessage.textContent = 'There was an error submitting the form.';
+                    formMessage.style.color = 'red';
+                });
+            }
+        });
+    });
+      </script>
 </body>
 </html>
